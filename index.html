@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>เครื่องมือคำนวณราคา</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .hoverable:hover {
+        transform: translateX(4px);
+        transition: transform 0.2s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="flex">
+    <aside id="sidebar" class="w-64 min-h-screen p-6 bg-gray-100 border-r border-gray-200 flex flex-col shadow-lg">
+      <h5 class="mb-6 font-bold text-gray-800 text-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 1.343 3 3v2a3 3 0 01-3 3H9a3 3 0 01-3-3v-2a3 3 0 013-3h3zm0-4v1a1 1 0 000 2V4zm0 16v1a1 1 0 000 2v-1z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0z" />
+        </svg>
+        ตัวคำนวณ
+      </h5>
+      <nav class="flex flex-col gap-2">
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="pvc.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+          คำนวณฉากกั้นแอร์
+        </a>
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="woodblind.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20h4V4h-4z" />
+          </svg>
+          คำนวณมู่ลี่ไม้
+        </a>
+        <div class="border-t border-gray-200 my-4"></div>
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="admin.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-.263 1.144-.263 1.57 0l.386.239a1 1 0 00.951.107l.21-.194c.484-.45 1.258-.29 1.636.31l.107.172c.264.426-.263 1.144-.263 1.57a1 1 0 00-.107.951l.194.21c.45.484.29 1.258-.31 1.636l-.172.107c-.426.264-1.144-.263-1.57-.263a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l-.172.107z" />
+          </svg>
+          ผู้ดูแลระบบ
+        </a>
+      </nav>
+      <div class="mt-auto text-sm text-gray-500 pt-6">© 2025 Product Calculator</div>
+    </aside>
+    <main class="flex-grow p-8">
+      <div class="container mx-auto">
+        <div class="bg-white p-12 rounded-2xl shadow-xl text-center">
+          <h1 class="font-extrabold text-4xl mb-4 text-gray-900">เครื่องมือคำนวณราคา</h1>
+          <p class="text-gray-500 mb-8 max-w-lg mx-auto">เลือกเมนูจากด้านซ้ายเพื่อเริ่มคำนวณ หรือจัดการราคาผ่านหน้าผู้ดูแลระบบ</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="pvc.html" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+              คำนวณฉากกั้นแอร์
+            </a>
+            <a href="woodblind.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20h4V4h-4z" />
+              </svg>
+              คำนวณมู่ลี่ไม้
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
