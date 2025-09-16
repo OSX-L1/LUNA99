@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>คำนวณม่านม้วน</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .hoverable:hover {
+        transform: translateX(4px);
+        transition: transform 0.2s ease-in-out;
+    }
+    .modal {
+      transition: opacity 0.2s ease-in-out;
+    }
+    .modal.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 min-h-screen p-6 bg-gray-100 border-r border-gray-200 flex flex-col shadow-lg">
+      <h5 class="mb-6 font-bold text-gray-800 text-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path d="M9 19V6l12-3v13c0 1.1-.9 2-2 2H9z" stroke-width="2" />
+          <path d="M11 19v-3.5L22 13v-3.5L11 6V2" stroke-width="2" />
+        </svg>
+        เมนูหลัก
+      </h5>
+      <nav class="flex-1 space-y-2">
+        <a href="index.html" class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-gray-200 transition duration-150 ease-in-out hoverable">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          หน้าแรก
+        </a>
+        <a href="pvc.html" class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-gray-200 transition duration-150 ease-in-out hoverable">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+          ฉากกั้นแอร์
+        </a>
+        <a href="woodblind.html" class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-gray-200 transition duration-150 ease-in-out hoverable">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M12 2v20M5 10l7-7 7 7" stroke-width="2" />
+          </svg>
+          มู่ลี่ไม้
+        </a>
+        <a href="rollerblind.html" class="flex items-center p-3 rounded-lg text-white bg-indigo-600 transition duration-150 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+            ม่านม้วน
+        </a>
+      </nav>
+      <div class="mt-auto pt-6 border-t border-gray-200">
+        <a href="admin.html" class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-gray-200 transition duration-150 ease-in-out hoverable">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.568.342 1.28.423 1.93.076z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          ผู้ดูแลระบบ
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+      <div class="container mx-auto">
+        <div class="bg-white p-6 md:p-12 rounded-2xl shadow-xl">
+          <h1 class="font-extrabold text-2xl md:text-4xl mb-4 text-gray-900">เครื่องมือคำนวณราคา ม่านม้วน</h1>
+          <p class="text-gray-500 mb-8 max-w-lg">กรอกรายละเอียดเพื่อคำนวณราคาและสร้างใบเสนอราคา</p>
+
+          <div class="space-y-4" id="itemRows">
+            <!-- Row will be added here by JS -->
+          </div>
+          <div class="flex justify-end mt-6">
+            <button id="addRow" class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 shadow-md">
+              เพิ่มรายการ
+            </button>
+          </div>
+          
+          <div class="mt-8 border-t-2 pt-6 border-gray-200">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xl font-bold text-gray-700">ราคารวม (Grand Total)</span>
+              <span id="grandTotal" class="text-2xl font-bold text-indigo-600">0.00</span>
+            </div>
+          </div>
+          
+          <div class="flex flex-col md:flex-row gap-4 mt-8">
+            <button id="generateQuote" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">
+              สร้างใบเสนอราคา
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden">
+      <div class="bg-white p-8 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div id="quoteArea" class="text-gray-800">
+          <!-- Quote content will be rendered here -->
+        </div>
+        <div class="flex justify-end gap-2 mt-4">
+          <button id="captureImg" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+            บันทึกเป็นรูปภาพ
+          </button>
+          <button id="downloadPdf" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+            ดาวน์โหลดเป็น PDF
+          </button>
+          <button id="closeModal" class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+            ปิด
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    const prices = {
+      dimout: {
+        'SOLIX': {
+          price: 290,
+          codes: ['TML-5161', 'TML-5162', 'TML-5163', 'TML-5164', 'TML-5165']
+        },
+        'SHEERO': {
+          price: 290,
+          codes: ['TM-5101', 'TM-5103', 'TM-5104', 'TM-5121', 'TM-5122', 'TM-5123', 'TM-5124']
+        },
+        'ARISO': {
+          price: 349,
+          codes: ['MED-0062', 'MED-0064', 'MED-0065', 'MED-0066', 'MED-0067']
+        }
+      },
+      sunscreen: {
+        'LUMI 3%': {
+          price: 280,
+          codes: ['RSP301', 'RSP302', 'RSP303', 'RSP311']
+        },
+        'LUMI 5%': {
+          price: 280,
+          codes: ['RSP501', 'RSP502', 'RSP503', 'RSP505', 'RPS506', 'RSP509', 'RSP510', 'RSP511', 'RSP512']
+        }
+      },
+      blackout: {
+        'AUROSUN': {
+          price: 399,
+          codes: ['A5-0002', 'A5-0003', 'A5-0004', 'A5-0005', 'A5-0006', 'A5-0007', 'A5-0008']
+        },
+        'BUOVI': {
+          price: 399,
+          codes: ['SZH-0021', 'SZH-0022', 'SZH-0024', 'SZH-0028', 'SZH-0029']
+        },
+        'KOALA NOVA': {
+          price: 280,
+          codes: ['RBP-3901', 'RBP-3902', 'RBP-3903', 'RBP-3908', 'RBP-3909', 'RBP-3910', 'RBP-3911', 'RBP-3912', 'RBP-3913', 'RBP-3914']
+        },
+        'Black out Promotion': {
+          price: 259,
+          codes: ['RBP-3901', 'RBP-3902', 'RBP-3903', 'RBP-3908', 'RBP-3909', 'RBP-3910', 'RBP-3911', 'RBP-3912', 'RBP-3913', 'RBP-3914']
+        }
+      }
+    };
+
+    const itemRows = document.getElementById('itemRows');
+    const addRowBtn = document.getElementById('addRow');
+    const grandTotalEl = document.getElementById('grandTotal');
+    const generateQuoteBtn = document.getElementById('generateQuote');
+    const quoteModalEl = document.getElementById('quoteModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const quoteAreaEl = document.getElementById('quoteArea');
+    const captureImgBtn = document.getElementById('captureImg');
+    const downloadPdfBtn = document.getElementById('downloadPdf');
+
+    const formatNumber = (num) => num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+    const updateFabricCodes = (fabricTypeSelect, fabricCodeSelect) => {
+      const selectedType = fabricTypeSelect.value;
+      fabricCodeSelect.innerHTML = '';
+      if (prices[selectedType]) {
+        for (const [key, value] of Object.entries(prices[selectedType])) {
+          const optgroup = document.createElement('optgroup');
+          optgroup.label = `${key} (฿${value.price})`;
+          value.codes.forEach(code => {
+            const option = document.createElement('option');
+            option.value = code;
+            option.textContent = code;
+            optgroup.appendChild(option);
+          });
+          fabricCodeSelect.appendChild(optgroup);
+        }
+      }
+    };
+
+    const calculateRow = (row) => {
+      // Get values from inputs. Unit is in centimeters.
+      const w_cm = parseFloat(row.querySelector('.width').value) || 0;
+      const h_cm = parseFloat(row.querySelector('.height').value) || 0;
+      const qty = parseInt(row.querySelector('.quantity').value) || 0;
+      const selectedCode = row.querySelector('.fabricCode').value;
+
+      let basePrice = 0;
+      for (const type in prices) {
+        for (const key in prices[type]) {
+          if (prices[type][key].codes.includes(selectedCode)) {
+            basePrice = prices[type][key].price;
+            break;
+          }
+        }
+      }
+      
+      // Convert centimeters to square meters for calculation
+      const w_m = w_cm / 100;
+      const h_m = h_cm / 100;
+
+      // Calculation: width(m) * height(m) * 1.2 * base_price * quantity
+      const total = w_m * h_m * 1.2 * basePrice * qty;
+      row.querySelector('.lineTotal').textContent = formatNumber(total);
+      calculateGrandTotal();
+    };
+
+    const calculateGrandTotal = () => {
+      let grandTotal = 0;
+      const rows = itemRows.querySelectorAll('.item-row');
+      rows.forEach(row => {
+        grandTotal += parseFloat((row.querySelector('.lineTotal').textContent || '0').replace(/,/g, ''));
+      });
+      grandTotalEl.textContent = formatNumber(grandTotal);
+    };
+
+    const createRow = () => {
+      const div = document.createElement('div');
+      div.className = "bg-gray-100 p-4 rounded-lg flex flex-col md:flex-row items-center gap-4 item-row";
+      div.innerHTML = `
+        <div class="w-full md:w-1/5">
+          <label class="block text-sm font-medium text-gray-700 mb-1">ประเภทของผ้า</label>
+          <select class="fabricType w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-indigo-300">
+            <!-- Options will be populated by JS -->
+          </select>
+        </div>
+        <div class="w-full md:w-1/5">
+          <label class="block text-sm font-medium text-gray-700 mb-1">รหัสผ้า</label>
+          <select class="fabricCode w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-indigo-300">
+            <!-- Options will be populated by JS -->
+          </select>
+        </div>
+        <div class="w-full md:w-2/5">
+          <label class="block text-sm font-medium text-gray-700 mb-1">กว้าง (ซม.) x สูง (ซม.)</label>
+          <div class="flex gap-2">
+            <input type="number" step="1" placeholder="กว้าง (ซม.)" class="width w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-indigo-300">
+            <input type="number" step="1" placeholder="สูง (ซม.)" class="height w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-indigo-300">
+          </div>
+        </div>
+        <div class="w-full md:w-1/5">
+          <label class="block text-sm font-medium text-gray-700 mb-1">จำนวน (ชุด) / ปรับ</label>
+          <div class="flex gap-2">
+            <input type="number" step="1" min="1" value="1" placeholder="จำนวน" class="quantity w-1/2 p-2 border rounded-lg focus:outline-none focus:ring focus:border-indigo-300">
+            <select class="side w-1/2 p-2 border rounded-lg focus:outline-none focus:ring focus:border-indigo-300">
+              <option value="left">ซ้าย</option>
+              <option value="right">ขวา</option>
+            </select>
+          </div>
+        </div>
+        <div class="w-full md:w-auto flex items-center justify-between mt-4 md:mt-0">
+          <span class="text-lg font-semibold text-gray-700">รวม:</span>
+          <span class="lineTotal text-lg font-bold text-indigo-600">0.00</span>
+          <button class="removeRow bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 112 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      `;
+      itemRows.appendChild(div);
+
+      const fabricTypeSelect = div.querySelector('.fabricType');
+      const fabricCodeSelect = div.querySelector('.fabricCode');
+
+      for (const type in prices) {
+        const option = document.createElement('option');
+        option.value = type;
+        option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        fabricTypeSelect.appendChild(option);
+      }
+
+      updateFabricCodes(fabricTypeSelect, fabricCodeSelect);
+
+      fabricTypeSelect.addEventListener('change', () => {
+        updateFabricCodes(fabricTypeSelect, fabricCodeSelect);
+        calculateRow(div);
+      });
+      fabricCodeSelect.addEventListener('change', () => calculateRow(div));
+      div.querySelector('.width').addEventListener('input', () => calculateRow(div));
+      div.querySelector('.height').addEventListener('input', () => calculateRow(div));
+      div.querySelector('.quantity').addEventListener('input', () => calculateRow(div));
+      div.querySelector('.removeRow').addEventListener('click', () => {
+        itemRows.removeChild(div);
+        calculateGrandTotal();
+      });
+      calculateRow(div);
+    };
+
+    const renderQuoteTable = ({ title, rows, grand }) => {
+      let tableRowsHtml = '';
+      rows.forEach(r => {
+        const sideText = r.side === 'left' ? 'ซ้าย' : 'ขวา';
+        tableRowsHtml += `
+          <tr class="border-b border-gray-200">
+            <td class="p-2">${r.fabricCode}</td>
+            <td class="p-2">${r.w} x ${r.h} (ซม.)</td>
+            <td class="p-2">${r.qty}</td>
+            <td class="p-2">${sideText}</td>
+            <td class="p-2 text-right">${formatNumber(r.price)}</td>
+          </tr>
+        `;
+      });
+
+      return `
+        <div class="p-4 md:p-8">
+          <h2 class="text-xl md:text-3xl font-bold mb-2">${title}</h2>
+          <p class="text-gray-500 mb-6">รายละเอียดการคำนวณ</p>
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="border-b-2 border-gray-400 text-left">
+                <th class="p-2">รหัสผ้า</th>
+                <th class="p-2">ขนาด (กว้าง x สูง)</th>
+                <th class="p-2">จำนวนชุด</th>
+                <th class="p-2">ด้านปรับ</th>
+                <th class="p-2 text-right">ราคารวม (บาท)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRowsHtml}
+            </tbody>
+          </table>
+          <div class="flex justify-end mt-4 text-xl font-bold">
+            <span class="mr-4">ยอดรวมทั้งหมด:</span>
+            <span>${formatNumber(grand)} บาท</span>
+          </div>
+        </div>
+      `;
+    };
+
+    // Add initial row
+    createRow();
+
+    // Event Listeners
+    addRowBtn.addEventListener('click', createRow);
+    generateQuoteBtn.addEventListener('click', () => {
+      const rows = [...itemRows.querySelectorAll('.item-row')].map(tr => ({
+        fabricCode: tr.querySelector('.fabricCode').value,
+        w: parseFloat(tr.querySelector('.width').value) || 0,
+        h: parseFloat(tr.querySelector('.height').value) || 0,
+        qty: parseInt(tr.querySelector('.quantity').value) || 0,
+        side: tr.querySelector('.side').value,
+        price: parseFloat((tr.querySelector('.lineTotal').textContent || '0').replace(/,/g, '')) || 0
+      })).filter(r => r.qty > 0 && r.w > 0 && r.h > 0);
+      
+      if (rows.length === 0) {
+        // Since we are not allowed to use alert(), log to console for debugging.
+        console.error("Please enter at least one valid item.");
+        return;
+      }
+
+      const grand = parseFloat(grandTotalEl.textContent.replace(/,/g, ''));
+
+      const html = renderQuoteTable({
+        title: 'ใบเสนอราคา - ม่านม้วน',
+        rows,
+        grand,
+      });
+      quoteAreaEl.innerHTML = html;
+      quoteModalEl.classList.remove('hidden');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      quoteModalEl.classList.add('hidden');
+    });
+
+    captureImgBtn.addEventListener('click', async () => {
+      const node = document.getElementById('quoteArea');
+      const canvas = await html2canvas(node, { scale: 2, backgroundColor: '#ffffff' });
+      const url = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ใบเสนอราคา-ม่านม้วน.png';
+      a.click();
+    });
+
+    downloadPdfBtn.addEventListener('click', () => {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const element = document.getElementById('quoteArea');
+      pdf.html(element, {
+          callback: (doc) => {
+              doc.save('ใบเสนอราคา-ม่านม้วน.pdf');
+          },
+          x: 10,
+          y: 10,
+          width: 190,
+          windowWidth: element.scrollWidth
+      });
+    });
+
+  </script>
+</body>
+</html>
