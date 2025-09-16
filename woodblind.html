@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>คำนวณมู่ลี่ไม้</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .hoverable:hover {
+        transform: translateX(4px);
+        transition: transform 0.2s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="flex">
+    <aside id="sidebar" class="w-64 min-h-screen p-6 bg-gray-100 border-r border-gray-200 flex flex-col shadow-lg">
+      <h5 class="mb-6 font-bold text-gray-800 text-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 1.343 3 3v2a3 3 0 01-3 3H9a3 3 0 01-3-3v-2a3 3 0 013-3h3zm0-4v1a1 1 0 000 2V4zm0 16v1a1 1 0 000 2v-1z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0z" />
+        </svg>
+        ตัวคำนวณ
+      </h5>
+      <nav class="flex flex-col gap-2">
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="pvc.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+          คำนวณฉากกั้นแอร์
+        </a>
+        <a class="nav-link px-4 py-2 rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 font-semibold transition duration-200 ease-in-out shadow-md" href="woodblind.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20h4V4h-4z" />
+          </svg>
+          คำนวณมู่ลี่ไม้
+        </a>
+        <div class="border-t border-gray-200 my-4"></div>
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="admin.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-.263 1.144-.263 1.57 0l.386.239a1 1 0 00.951.107l.21-.194c.484-.45 1.258-.29 1.636.31l.107.172c.264.426-.263 1.144-.263 1.57a1 1 0 00-.107.951l.194.21c.45.484.29 1.258-.31 1.636l-.172.107c-.426.264-1.144-.263-1.57-.263a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107c.426.264.263 1.144-.263 1.57a1 1 0 00-.951.107l-.21.194c-.484.45-.29 1.258.31 1.636l.172.107z" />
+          </svg>
+          ผู้ดูแลระบบ
+        </a>
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="index.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          กลับหน้าแรก
+        </a>
+      </nav>
+      <div class="mt-auto text-sm text-gray-500 pt-6">© 2025 Product Calculator</div>
+    </aside>
+    <main class="flex-grow p-8">
+      <div class="container mx-auto">
+        <div class="bg-white p-6 rounded-2xl shadow-xl">
+          <h1 class="font-bold text-2xl mb-6 text-gray-900">คำนวณมู่ลี่ไม้</h1>
+          <div class="flex items-center mb-6 p-4 bg-yellow-50 text-yellow-700 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm">การกรอกขนาดเป็นเซนติเมตร (เช่น 220, 240.5)</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="col-span-1 md:col-span-2 lg:col-span-1">
+              <label for="basePrice" class="block text-sm font-medium text-gray-700 mb-2">ราคา/ตร.ม. (เริ่มต้น)</label>
+              <select id="basePrice" class="w-full px-4 py-2.5 bg-gray-100 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-indigo-500 transition duration-200"></select>
+            </div>
+            <div class="col-span-1 md:col-span-2 lg:col-span-1">
+              <label for="customPrice" class="block text-sm font-medium text-gray-700 mb-2">ราคา/ตร.ม. (กำหนดเอง)</label>
+              <input type="number" id="customPrice" class="w-full px-4 py-2.5 bg-gray-100 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-indigo-500 transition duration-200" placeholder="กำหนดเอง">
+            </div>
+            <div class="col-span-1 md:col-span-2 lg:col-span-2">
+              <label for="extraName" class="block text-sm font-medium text-gray-700 mb-2">เพิ่มรายการ</label>
+              <div class="flex space-x-2">
+                <input type="text" id="extraName" class="w-full px-4 py-2.5 bg-gray-100 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-indigo-500 transition duration-200" placeholder="รหัสสินค้า / รายละเอียด">
+                <input type="number" id="extraPrice" class="w-24 px-4 py-2.5 bg-gray-100 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-indigo-500 transition duration-200" placeholder="ราคา">
+                <button id="addExtra" class="px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition duration-300 transform hover:scale-105 shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-100 rounded-lg">
+              <tr>
+                <th scope="col" class="px-3 py-3 rounded-l-lg">รหัสสินค้า</th>
+                <th scope="col" class="px-3 py-3">กว้าง (ซม.)</th>
+                <th scope="col" class="px-3 py-3">สูง (ซม.)</th>
+                <th scope="col" class="px-3 py-3 text-center">จำนวน</th>
+                <th scope="col" class="px-3 py-3 text-right">ราคา/ตร.ม.</th>
+                <th scope="col" class="px-3 py-3 text-right">ราคารวม</th>
+                <th scope="col" class="px-3 py-3 rounded-r-lg"></th>
+              </tr>
+            </thead>
+            <tbody id="calBody">
+              <tr class="bg-white border-b hover:bg-gray-50">
+                <td class="px-3 py-3">
+                  <input type="text" class="w-full p-2 border border-gray-300 rounded-md code" placeholder="-">
+                </td>
+                <td class="px-3 py-3">
+                  <input type="number" class="w-full p-2 border border-gray-300 rounded-md wVal" placeholder="0" min="0">
+                </td>
+                <td class="px-3 py-3">
+                  <input type="number" class="w-full p-2 border border-gray-300 rounded-md hVal" placeholder="0" min="0">
+                </td>
+                <td class="px-3 py-3">
+                  <input type="number" class="w-full p-2 border border-gray-300 rounded-md qtyVal" value="1" min="1">
+                </td>
+                <td class="px-3 py-3">
+                  <input type="number" class="w-full p-2 border border-gray-300 rounded-md customLinePrice" placeholder="0" min="0">
+                </td>
+                <td class="px-3 py-3 text-right font-semibold lineTotal">0.00</td>
+                <td class="px-3 py-3 text-center">
+                  <button class="bg-red-500 text-white p-2 rounded-lg remove-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="mt-6 flex justify-between items-center flex-wrap gap-4">
+            <button id="addBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+              </svg>
+              เพิ่มรายการ
+            </button>
+            <div class="flex items-center gap-4">
+              <span class="text-lg font-bold">ราคารวม:</span>
+              <span id="grandTotal" class="text-3xl font-extrabold text-indigo-600">0.00</span>
+              <span class="text-lg font-semibold">บาท</span>
+            </div>
+            <button id="quoteBtn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-1.5 8h3a.5.5 0 000-1h-3a.5.5 0 000 1zm0 3h3a.5.5 0 000-1h-3a.5.5 0 000 1z" />
+              </svg>
+              สร้างใบเสนอราคา
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="quoteModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 hidden">
+    <div class="relative w-full max-w-2xl mx-auto my-12 bg-white rounded-lg shadow-xl overflow-hidden">
+      <div class="p-6">
+        <div id="quoteArea" class="bg-white p-4 rounded-lg"></div>
+        <div class="flex justify-end gap-4 mt-6">
+          <button id="captureImg" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">ดาวน์โหลดรูปภาพ</button>
+          <button id="downloadPdf" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">ดาวน์โหลด PDF</button>
+          <button id="closeModal" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">ปิด</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Prices & Formulas
+    const DEFAULT_PRICES = {
+      pvcPrices: [
+        { label: '349 ฉากทึบ', value: 349 },
+        { label: '799 ฉากญี่ปุ่น', value: 799 },
+        { label: '899 ฉากยูโร LA', value: 899 },
+        { label: '999 ฉากยูโร LB', value: 999 }
+      ],
+      woodBlindPrices: [
+        { label: 'ไม้โฟมวู้ด 799', value: 799 },
+        { label: 'ไม้บาสวู้ด 820', value: 820 }
+      ],
+      extraCategories: []
+    };
+    function getAllPrices(){
+      try {
+        const raw = localStorage.getItem('pc_prices');
+        if (!raw) return JSON.parse(JSON.stringify(DEFAULT_PRICES));
+        const obj = JSON.parse(raw);
+        return {
+          pvcPrices: Array.isArray(obj.pvcPrices) && obj.pvcPrices.length ? obj.pvcPrices : DEFAULT_PRICES.pvcPrices,
+          woodBlindPrices: Array.isArray(obj.woodBlindPrices) && obj.woodBlindPrices.length ? obj.woodBlindPrices : DEFAULT_PRICES.woodBlindPrices,
+          extraCategories: Array.isArray(obj.extraCategories) ? obj.extraCategories : []
+        };
+      } catch(e){
+        return JSON.parse(JSON.stringify(DEFAULT_PRICES));
+      }
+    }
+    const woodBlindFormula = (w, h, price, qty=1) => {
+      const wM = w / 100;
+      const hM = h / 100;
+      if (!wM || !hM || !price || !qty) return 0;
+      const wEff = Math.max(0.80, wM);
+      const hEff = Math.max(1.0, hM);
+      return wEff * hEff * 1.2 * price * qty;
+    };
+    
+    // Money & quote renderer
+    const formatMoney = (num) => (num||0).toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const renderQuoteTable = ({ title, subtitle, rows, grand }) => {
+      const rowsHtml = rows.map(r=>`
+        <tr class="hover:bg-gray-50">
+          <td class="px-3 py-2 text-gray-600">${r.index}</td>
+          <td class="px-3 py-2 text-gray-600">${r.code}</td>
+          <td class="px-3 py-2 text-gray-600">${(r.w * 100).toFixed(0)} x ${(r.h * 100).toFixed(0)}</td>
+          <td class="px-3 py-2 text-center text-gray-600">${r.qty}</td>
+          <td class="px-3 py-2 text-right text-gray-600">${formatMoney(r.price)}</td>
+          <td class="px-3 py-2 text-right font-semibold text-gray-800">${formatMoney(r.total)}</td>
+        </tr>`).join('');
+      return `
+      <div class="p-6">
+        <div class="mb-4 text-center">
+          <h4 class="font-bold text-2xl mb-1">${title}</h4>
+          <div class="text-gray-500">${subtitle||''}</div>
+        </div>
+        <div class="border rounded-xl overflow-hidden shadow-sm">
+          <table class="w-full text-sm text-left">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+              <tr>
+                <th scope="col" class="px-3 py-3">ลำดับ</th>
+                <th scope="col" class="px-3 py-3">รหัสสินค้า</th>
+                <th scope="col" class="px-3 py-3">ขนาด (กว้าง x สูง)</th>
+                <th scope="col" class="px-3 py-3 text-center">จำนวนชุด</th>
+                <th scope="col" class="px-3 py-3 text-right">ราคา/ตร.ม.</th>
+                <th scope="col" class="px-3 py-3 text-right">ราคารวม</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHtml}</tbody>
+          </table>
+        </div>
+        <div class="flex justify-end items-center mt-6">
+          <span class="text-lg font-bold">ราคารวมสุทธิ:</span>
+          <span class="text-3xl font-extrabold text-indigo-600 ml-4">${formatMoney(grand)}</span>
+          <span class="text-lg font-semibold ml-2">บาท</span>
+        </div>
+      </div>`;
+    };
+
+    // DOM & Event Handlers
+    document.addEventListener('DOMContentLoaded', () => {
+      const tbody = document.getElementById('calBody');
+      const addBtn = document.getElementById('addBtn');
+      const quoteBtn = document.getElementById('quoteBtn');
+      const basePriceEl = document.getElementById('basePrice');
+      const customPriceEl = document.getElementById('customPrice');
+      const grandTotalEl = document.getElementById('grandTotal');
+      const quoteModalEl = document.getElementById('quoteModal');
+      const quoteAreaEl = document.getElementById('quoteArea');
+      const closeModalBtn = document.getElementById('closeModal');
+      const captureImgBtn = document.getElementById('captureImg');
+      const downloadPdfBtn = document.getElementById('downloadPdf');
+      const addExtraBtn = document.getElementById('addExtra');
+      const extraNameInput = document.getElementById('extraName');
+      const extraPriceInput = document.getElementById('extraPrice');
+
+      const prices = getAllPrices();
+      
+      const renderPrices = () => {
+          basePriceEl.innerHTML = prices.woodBlindPrices.map(p => `<option value="${p.value}">${p.label}</option>`).join('');
+          const extraOptions = prices.extraCategories.map(c => 
+            `<optgroup label="${c.title}">` + 
+            (c.items || []).map(p => `<option value="${p.value}">${p.label}</option>`).join('') +
+            `</optgroup>`
+          ).join('');
+          basePriceEl.innerHTML += extraOptions;
+      };
+      renderPrices();
+
+      const calcLine = (tr) => {
+        const wVal = parseFloat(tr.querySelector('.wVal').value);
+        const hVal = parseFloat(tr.querySelector('.hVal').value);
+        const qtyVal = parseInt(tr.querySelector('.qtyVal').value);
+        const customLinePrice = parseFloat(tr.querySelector('.customLinePrice').value);
+        let price = customLinePrice;
+        if (!price || price === 0) {
+          price = parseFloat(basePriceEl.value) || 0;
+        }
+
+        const total = woodBlindFormula(wVal, hVal, price, qtyVal);
+        tr.querySelector('.lineTotal').textContent = formatMoney(total);
+        calcAll();
+      };
+
+      const calcAll = () => {
+        let grand = 0;
+        const rows = [...tbody.querySelectorAll('tr')];
+        rows.forEach(tr => {
+          const wVal = parseFloat(tr.querySelector('.wVal').value);
+          const hVal = parseFloat(tr.querySelector('.hVal').value);
+          const qtyVal = parseInt(tr.querySelector('.qtyVal').value);
+          const customLinePrice = parseFloat(tr.querySelector('.customLinePrice').value);
+          let price = customLinePrice;
+          if (!price || price === 0) {
+            price = parseFloat(basePriceEl.value) || 0;
+          }
+
+          const total = woodBlindFormula(wVal, hVal, price, qtyVal);
+          tr.querySelector('.lineTotal').textContent = formatMoney(total);
+          grand += total;
+        });
+        grandTotalEl.textContent = formatMoney(grand);
+        return grand;
+      };
+
+      const addRow = (code = '', w = '', h = '', qty = 1, price = '') => {
+        const newRow = document.createElement('tr');
+        newRow.className = "bg-white border-b hover:bg-gray-50";
+        newRow.innerHTML = `
+          <td class="px-3 py-3">
+            <input type="text" class="w-full p-2 border border-gray-300 rounded-md code" placeholder="-" value="${code}">
+          </td>
+          <td class="px-3 py-3">
+            <input type="number" class="w-full p-2 border border-gray-300 rounded-md wVal" placeholder="0" min="0" value="${w}">
+          </td>
+          <td class="px-3 py-3">
+            <input type="number" class="w-full p-2 border border-gray-300 rounded-md hVal" placeholder="0" min="0" value="${h}">
+          </td>
+          <td class="px-3 py-3">
+            <input type="number" class="w-full p-2 border border-gray-300 rounded-md qtyVal" value="${qty}" min="1">
+          </td>
+          <td class="px-3 py-3">
+            <input type="number" class="w-full p-2 border border-gray-300 rounded-md customLinePrice" placeholder="0" min="0" value="${price}">
+          </td>
+          <td class="px-3 py-3 text-right font-semibold lineTotal">0.00</td>
+          <td class="px-3 py-3 text-center">
+            <button class="bg-red-500 text-white p-2 rounded-lg remove-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(newRow);
+        newRow.querySelectorAll('input').forEach(el => el.addEventListener('input', () => calcLine(newRow)));
+        newRow.querySelector('.remove-btn').addEventListener('click', () => {
+          newRow.remove();
+          calcAll();
+        });
+      };
+
+      addBtn.addEventListener('click', () => addRow());
+      tbody.querySelectorAll('input').forEach(el => el.addEventListener('input', () => calcLine(el.closest('tr'))));
+      tbody.querySelectorAll('.remove-btn').forEach(btn => btn.addEventListener('click', () => {
+        btn.closest('tr').remove();
+        calcAll();
+      }));
+      basePriceEl.addEventListener('change', calcAll);
+      customPriceEl.addEventListener('input', () => {
+        basePriceEl.value = '';
+        calcAll();
+      });
+
+      addExtraBtn.addEventListener('click', () => {
+        const code = extraNameInput.value.trim();
+        const price = parseFloat(extraPriceInput.value);
+        if (code && !isNaN(price) && price > 0) {
+          addRow(code, '100', '100', 1, price);
+          extraNameInput.value = '';
+          extraPriceInput.value = '';
+        }
+      });
+      
+      quoteBtn.addEventListener('click', () => {
+        const grand = calcAll();
+        const rows = [...tbody.querySelectorAll('tr')].map((tr, i) => ({
+          index: i + 1,
+          code: tr.querySelector('.code').value || '-',
+          w: parseFloat(tr.querySelector('.wVal').value) / 100 || 0,
+          h: parseFloat(tr.querySelector('.hVal').value) / 100 || 0,
+          qty: parseInt(tr.querySelector('.qtyVal').value) || 0,
+          price: parseFloat(tr.querySelector('.customLinePrice').value) || parseFloat(basePriceEl.value) || 0,
+          total: parseFloat((tr.querySelector('.lineTotal').textContent || '0').replace(/,/g, '')) || 0
+        })).filter(r => r.qty > 0 && r.w > 0 && r.h > 0);
+        
+        const html = renderQuoteTable({
+          title: 'ใบเสนอราคา - มู่ลี่ไม้',
+          subtitle: `ราคาเริ่มต้น: ${document.querySelector('#basePrice option:checked')?.textContent || 'กำหนดเอง'}`,
+          rows,
+          grand,
+        });
+        quoteAreaEl.innerHTML = html;
+        quoteModalEl.classList.remove('hidden');
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        quoteModalEl.classList.add('hidden');
+      });
+
+      captureImgBtn.addEventListener('click', async () => {
+        const node = document.getElementById('quoteArea');
+        const canvas = await html2canvas(node, { scale: 2, backgroundColor: '#ffffff' });
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ใบเสนอราคา-มู่ลี่ไม้.png';
+        a.click();
+      });
+
+      downloadPdfBtn.addEventListener('click', () => {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const element = document.getElementById('quoteArea');
+        pdf.html(element, {
+            callback: (doc) => {
+                doc.save('ใบเสนอราคา-มู่ลี่ไม้.pdf');
+            },
+            x: 10,
+            y: 10,
+            html2canvas: { scale: 0.5 }
+        });
+      });
+
+      calcAll();
+    });
+  </script>
+</body>
+</html>
