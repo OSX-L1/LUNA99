@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ผู้ดูแลระบบ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .hoverable:hover {
+        transform: translateX(4px);
+        transition: transform 0.2s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="flex">
+    <aside id="sidebar" class="w-64 min-h-screen p-6 bg-gray-100 border-r border-gray-200 flex flex-col shadow-lg">
+      <h5 class="mb-6 font-bold text-gray-800 text-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 1.343 3 3v2a3 3 0 01-3 3H9a3 3 0 01-3-3v-2a3 3 0 013-3h3zm0-4v1a1 1 0 000 2V4zm0 16v1a1 1 0 000 2v-1z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0z" />
+        </svg>
+        ผู้ดูแลระบบ
+      </h5>
+      <nav class="flex flex-col gap-2">
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="pvc.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+          คำนวณฉากกั้นแอร์
+        </a>
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="woodblind.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20h4V4h-4z" />
+          </svg>
+          คำนวณมู่ลี่ไม้
+        </a>
+        <div class="border-t border-gray-200 my-4"></div>
+        <a class="nav-link px-4 py-2 rounded-lg text-gray-600 hover:bg-indigo-100 hover:text-indigo-800 transition duration-200 ease-in-out hoverable" href="index.html">
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          กลับหน้าแรก
+        </a>
+      </nav>
+      <div class="mt-auto text-sm text-gray-500 pt-6">© 2025 Product Calculator</div>
+    </aside>
+    <main class="flex-grow p-8">
+      <div class="container mx-auto">
+        <div class="bg-white p-6 rounded-2xl shadow-xl">
+          <h1 class="font-bold text-2xl mb-6 text-gray-900">ผู้ดูแลระบบ: จัดการราคา</h1>
+          <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"></div>
+          <div class="flex flex-col sm:flex-row gap-4 justify-end">
+            <button id="addCategory" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+              </svg>
+              เพิ่มหมวดหมู่
+            </button>
+            <button id="saveAll" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl transition duration-300 transform hover:scale-105 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-1.5 8h3a.5.5 0 000-1h-3a.5.5 0 000 1zm0 3h3a.5.5 0 000-1h-3a.5.5 0 000 1z" />
+              </svg>
+              บันทึกราคา
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Prices with optional extra categories
+    const DEFAULT_PRICES = {
+      pvcPrices: [
+        { label: '349 ฉากทึบ', value: 349 },
+        { label: '799 ฉากญี่ปุ่น', value: 799 },
+        { label: '899 ฉากยูโร LA', value: 899 },
+        { label: '999 ฉากยูโร LB', value: 999 }
+      ],
+      woodBlindPrices: [
+        { label: 'ไม้โฟมวู้ด 799', value: 799 },
+        { label: 'ไม้บาสวู้ด 820', value: 820 }
+      ],
+      extraCategories: []
+    };
+    function getAllPrices(){
+      try {
+        const raw = localStorage.getItem('pc_prices');
+        if (!raw) return JSON.parse(JSON.stringify(DEFAULT_PRICES));
+        const obj = JSON.parse(raw);
+        return {
+          pvcPrices: Array.isArray(obj.pvcPrices) && obj.pvcPrices.length ? obj.pvcPrices : DEFAULT_PRICES.pvcPrices,
+          woodBlindPrices: Array.isArray(obj.woodBlindPrices) && obj.woodBlindPrices.length ? obj.woodBlindPrices : DEFAULT_PRICES.woodBlindPrices,
+          extraCategories: Array.isArray(obj.extraCategories) ? obj.extraCategories : []
+        };
+      } catch(e){
+        return JSON.parse(JSON.stringify(DEFAULT_PRICES));
+      }
+    }
+    function saveAllPrices(obj){ localStorage.setItem('pc_prices', JSON.stringify(obj)); }
+
+    const grid = document.getElementById('grid');
+
+    const makeCategoryCard = ({ title, key, items }) => {
+      const card = document.createElement('div');
+      card.className = "bg-white p-4 rounded-xl shadow-lg border border-gray-200";
+      card.setAttribute('data-key', key);
+      card.innerHTML = `
+        <div class="flex justify-between items-center mb-4">
+          <input type="text" value="${title}" class="font-bold text-lg text-gray-900 border-b border-gray-300 focus:outline-none category-title w-full bg-transparent">
+          ${!['pvc', 'woodblind'].includes(key) ? `
+          <button class="bg-red-500 text-white p-1 rounded-full ml-2 remove-cat-btn flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+          </button>` : ''}
+        </div>
+        <table class="w-full text-sm text-gray-500">
+          <thead>
+            <tr>
+              <th class="px-2 py-1 text-left">ชื่อ</th>
+              <th class="px-2 py-1 text-left w-24">ราคา</th>
+              <th class="px-2 py-1"></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${items.map(item => `
+              <tr class="item-row">
+                <td class="px-2 py-1">
+                  <input type="text" class="w-full p-1 border rounded name" value="${item.label}">
+                </td>
+                <td class="px-2 py-1">
+                  <input type="number" class="w-full p-1 border rounded value" value="${item.value}">
+                </td>
+                <td class="px-2 py-1 text-center">
+                  <button class="bg-red-500 text-white p-1 rounded-lg remove-item-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <div class="mt-4 flex justify-end">
+          <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-1 px-3 rounded-lg text-sm add-item-btn">
+            เพิ่มรายการ
+          </button>
+        </div>
+      `;
+      grid.appendChild(card);
+
+      const tbody = card.querySelector('tbody');
+      card.querySelector('.add-item-btn').addEventListener('click', () => {
+        const newRow = document.createElement('tr');
+        newRow.className = "item-row";
+        newRow.innerHTML = `
+          <td class="px-2 py-1">
+            <input type="text" class="w-full p-1 border rounded name" value="">
+          </td>
+          <td class="px-2 py-1">
+            <input type="number" class="w-full p-1 border rounded value" value="">
+          </td>
+          <td class="px-2 py-1 text-center">
+            <button class="bg-red-500 text-white p-1 rounded-lg remove-item-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(newRow);
+        newRow.querySelector('.remove-item-btn').addEventListener('click', () => newRow.remove());
+      });
+      card.querySelectorAll('.remove-item-btn').forEach(btn => btn.addEventListener('click', () => btn.closest('.item-row').remove()));
+      if (card.querySelector('.remove-cat-btn')) {
+        card.querySelector('.remove-cat-btn').addEventListener('click', () => card.remove());
+      }
+    };
+
+    const renderAll = () => {
+      grid.innerHTML = '';
+      const data = getAllPrices();
+      makeCategoryCard({ title: 'ฉากกั้นแอร์', key: 'pvc', items: data.pvcPrices });
+      makeCategoryCard({ title: 'มู่ลี่ไม้', key: 'woodblind', items: data.woodBlindPrices });
+      (data.extraCategories||[]).forEach((c)=> makeCategoryCard({ title: c.title, key: c.key, items: c.items||[] }) );
+    }
+    renderAll();
+
+    document.getElementById('addCategory').addEventListener('click', ()=>{
+      const key = 'extra-' + Date.now();
+      makeCategoryCard({ title: 'หมวดหมู่ใหม่', key, items: [] });
+    });
+
+    document.getElementById('saveAll').addEventListener('click', ()=>{
+      const cats = [...grid.querySelectorAll('.bg-white')].map(card=>{
+        const key = card.getAttribute('data-key');
+        const title = card.querySelector('.category-title').value || '';
+        const items = [...card.querySelectorAll('tbody tr')].map(tr=>({ label: tr.querySelector('.name').value||'-', value: parseFloat(tr.querySelector('.value').value)||0 }));
+        return { key, title, items };
+      });
+      const pvc = cats.find(c=>c.key==='pvc')?.items || [];
+      const wb  = cats.find(c=>c.key==='woodblind')?.items || [];
+      const extra = cats.filter(c=>!['pvc','woodblind'].includes(c.key)).map(c=>({ key: c.key, title: c.title, items: c.items }));
+      saveAllPrices({ pvcPrices: pvc, woodBlindPrices: wb, extraCategories: extra });
+      alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
+      renderAll();
+    });
+  </script>
+</body>
+</html>
